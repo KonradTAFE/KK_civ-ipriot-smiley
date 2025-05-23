@@ -207,23 +207,34 @@ Compare and contrast the classes Happy and Sad.
    > Both classes are a child of Smiley and define draw_mouth() and draw_eyes() methods
    >
 3. What difference stands out the most to you and why?
-   > Your answer here
+   > While Happy class uses tertiary operator to change the attribute of pixels,
+   > Sad reassigns the value for "eyes" to achieve the same result. 
    >
 4. How does this difference affect the functionality of these classes
-   > Your answer here
+   > Variable "eyes" starts as an iterable list of pixels to be changed, but later on
+   > gets reassigned to a single value: self.BLANK or self.YELLOW. This means eyes is no longer
+   > a list after this block of code, hence is not reusable
    >
 
 ### 2.6. Where is the Sense(Hat) in the code?
 
 1. Which class(es) utilize the functionality of the SenseHat?
-   > Your answer here
+   > As Sad and Happy are child-classes of Smiley class, all three of them utilize the SenseHat functionality
    >
 2. Which of these classes directly interact with the SenseHat functionalities?
-   > Your answer here
+   > Smiley is the only class which directly interacts with SenseHat by importing sense_hat library
    >
 3. Discuss the hiding of the SenseHAT in terms of encapsulation (100-200 Words)
-   > Your answer here
+   > In current project, SenseHAT is hidden in the base class Smiley and can only be accessed by creating an instance
+   > of this class. All the methods for using SenseHAT are defined within the base class. This enhances protection, 
+   > reusability and maintainability of the class, which are core rules for encapsulation.
+   > By encolsing SenseHAT access to main class, we can create child-classes which will inherit the
+   > methods of accessing SenseHat only with predetermined set of attributes. 
+   > In this project, Happy and Sad classes deal only with the way the smiley will look - happy or sad, 
+   > by changing pixels in the list of pixels in superclass Smiley.
    >
+> 
+> Bex Tuychiev. “Encapsulation in Python: A Comprehensive Guide.” Datacamp.com, DataCamp, 29 Apr. 2024, www.datacamp.com/tutorial/encapsulation-in-python-object-oriented-programming.
 
 ### 2.7. Sad Smileys Can’t Blink (Or Can They?)
 
@@ -233,7 +244,7 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 
 1. Does the code's author believe that every `Smiley` should be able to blink? Explain.
 
-> Your answer here
+> No, only the Happy Smiley can blink (if initiated with draw_eyes() or draw_eyes(True))
 >
 
 2. For those smileys that blink, does the author expect them to blink in the same way? Explain.
