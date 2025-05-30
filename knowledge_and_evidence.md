@@ -231,7 +231,7 @@ Compare and contrast the classes Happy and Sad.
    > By encolsing SenseHAT access to main class, we can create child-classes which will inherit the
    > methods of accessing SenseHat only with predetermined set of attributes. 
    > In this project, Happy and Sad classes deal only with the way the smiley will look - happy or sad, 
-   > by changing pixels in the list of pixels in superclass Smiley.
+   > by changing pixels in the list of pixels of the superclass, Smiley.
    >
 > 
 > Bex Tuychiev. “Encapsulation in Python: A Comprehensive Guide.” Datacamp.com, DataCamp, 29 Apr. 2024, www.datacamp.com/tutorial/encapsulation-in-python-object-oriented-programming.
@@ -244,23 +244,30 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 
 1. Does the code's author believe that every `Smiley` should be able to blink? Explain.
 
-> No, only the Happy Smiley can blink (if initiated with draw_eyes() or draw_eyes(True))
+> No, only Happy Smiley inherits and overrides the blink method of Blinkable superclass and therefore only Happy can blink.
 >
 
 2. For those smileys that blink, does the author expect them to blink in the same way? Explain.
 
-> Your answer here
+> No, the blink method in Happy allows for a different blink delay to be specified.
 >
 
 3. Referring to the implementation of blink in the Happy and Sad Smiley classes, give a brief explanation of what polymorphism is.
 
-> Your answer here
+> Polymorphism is a concept of allowing unrelated objects to be treated as objects of the same type by binding them to a common superclass,
+> which, as in this case, contains an empty (abstract) method which needs to be overriden within the subclass.
 >
 
 4. How is inheritance used in the blink method, and why is it important for polymorphism?
 
-> Your answer here
->
+> Polymorphism is achieved through inheritance: to properly use polymophism, we need to bind different objects to the same superclass
+> which will make them inherit the superclass's mathods which can be later overriden within the object, and the objects can be treated as
+> same class objects.
+> Blink method is defined as abstract on the superclass Blinkable level. Since Happy class is a subclass of Blinkable, it has access to
+> 'blink', but needs to redefine it (overwrite) since the method is abstract, empty.
+
+>www.w3schools.com. (n.d.). Python Polymorphism. [online] Available at: https://www.w3schools.com/python/python_polymorphism.asp.
+
 1. **Implement Blink in Sad Class:**
 
    - Create a new method called `blink` within the Sad class. Ensure you use the same method signature as in the Happy class:
@@ -279,10 +286,11 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 Include a screenshot of the sad smiley or the modified `main.py`:
 
 ![Sad Smiley Blinking](screenshots/sad_blinking.png)
-
+![image.png](screenshots%2Fimage.png)
+!![image_2.png](screenshots%2Fimage_2.png)
 - Observe and document the Sad smiley as it blinks its eyes. Describe any adjustments or issues encountered during implementation.
 
-  > Your answer here
+  > Smiley closed eyes but didn't reopen them - had to "import time"
 
   ### 2.8. If It Walks Like a Duck…
 
@@ -290,23 +298,26 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
   1. **Class Type Analysis:** What kind of class is `Blinkable`? Inspect its superclass for clues about its classification.
 
-     > Your answer here
+     > Blinkable is an abstract class, an interface intended to force its subclasses to implement some behaviours (methods)
 
-  2. **Class Implementation:** `Blinkable` is a class intended to be implemented by other classes. What generic term describes this kind of class, which is designed for implementation by others? **Clue**: Notice the lack of any concrete implementation and the naming convention.
+2. **Class Implementation:** `Blinkable` is a class intended to be implemented by other classes. What generic term describes this kind of class, which is designed for implementation by others? **Clue**: Notice the lack of any concrete implementation and the naming convention.
 
-  > Your answer here
+> Blinkable is an Interface - a contract between a class and its users; it specifies a methods that a subclass must implement.
+> 
+> Kant, S. (2023). Interfaces and Abstract Classes in Python: Understanding the Differences. [online] Medium. Available at: https://medium.com/@shashikantrbl123/interfaces-and-abstract-classes-in-python-understanding-the-differences-3e5889a0746a.
 
   3. **OO Principle Identification:** Regarding your answer to question (2), which Object-Oriented (OO) principle does this represent? Choose from the following and justify your answer in 1-2 sentences: Abstraction, Polymorphism, Inheritance, Encapsulation.
 
-  > Your answer here
+  > Blinkable represents the principle of Abstraction - it is a class which cannot be initialed on its own, but rather serves as a blueprint for other classes to follow.
 
   4. **Implementation Flexibility:** Explain why you could grant the Sad Smiley a blinking feature similar to the Happy Smiley's implementation, even without directly using `Blinkable`.
 
-  > Your answer here
+  >  We can define a 'blink' method since it uses the 'draw_eyes' method defined within the class as well as 'show' method defined on superclass. Not using Blinkable means Sad doesn't have to implement blink method.
 
   5. **Concept and Language Specificity:** In relation to your response to question (4), what is this capability known as, and why is it feasible in Python and many other dynamically typed languages but not in most statically typed programming languages like C#? **Clue** This concept is hinted at in the title of this section.
 
-  > Your answer here
+  > It is an example of Duck typing - since Sad Smiley implements the 'blink' method and has all necessary attributes to do it, Python interprets it as a class of the same type as Happy.
+  > This capability is dynamically typed languages like Python as we do not need to specify the type of objects and can use them interchangeably based on their behavior without worrying about their types. 
 
   ***
 
@@ -319,19 +330,21 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   1. **Defined Colors and Their Location:**
 
      1. Which colors are defined and in which class(s)?
-        > Your answer here
+        > Smiley class defines colors: WHITE, GREEN, RED, YELLOW, BLANK (black)
+
      2. What type of variables hold these colors? Are the values expected to change during the program's execution? Explain your answer.
-        > Your answer here
+        > Colors are held in constant tuples which represent the colors in RGB scale. The colors are not expected to change, which is why they are written in capitals.
      3. Add the color blue to the appropriate class using the appropriate format and values.
+        > BLUE = (0, 0, 255)
 
   2. **Usage of Color Variables:**
 
      1. In which classes are the color variables used?
-        > Your answer here
+        > Colors are used in Smiley (to draw the while face circle), Sad (eyes and sad mouth) and Happy (eyes and happy mouth)
 
   3. **Simple Method to Change Colors:**
   4. What is the easiest way you can think to change the smileys to green? Easiest, not necessarily the best!
-     > Your answer here
+     > Change the definition of YELLOW in Smiley class to (0, 255, 0).
 
   Here's a revised version of the "Flexible Colors – Step 1" section for the smiley project, incorporating your specifications for formatting and content updates:
 
@@ -382,5 +395,5 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   3. **Ensure the Happy smiley remains yellow:** Confirm that changes to the Sad smiley do not affect the default color of the Happy smiley, which should still display in yellow.
 
   4. **Design and Implement An Angry Smiley:** Create an Angry smiley class that inherits from the `Smiley` class. Set the color of the Angry smiley to red by passing `self.RED` as the `complexion` argument in the superclass call.
-
+   ![img.png](screenshots/angry.png)
   ***
